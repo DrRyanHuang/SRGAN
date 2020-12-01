@@ -1,6 +1,6 @@
 # SRGAN
-
-SRGAN 的 PyTorch 实现，基于 CVPR 2017 论文[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802).
+A PyTorch implementation of SRGAN based on CVPR 2017 paper 
+[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802).
 
 ## Requirements
 - [Anaconda](https://www.anaconda.com/download/)
@@ -16,30 +16,24 @@ conda install opencv
 ## Datasets
 
 ### Train、Val Dataset
-训练集和验证集均从 [VOC2012](http://cvlab.postech.ac.kr/~mooyeol/pascal_voc_2012/) 中采样.
-训练集有16700张图片，验证集有425张图片.
-数据集从[这里](https://pan.baidu.com/s/1xuFperu2WiYc5-_QXBemlA)下载 (提取码 : 5tzp), 并将数据解压到 `data` 目录.
+The train and val datasets are sampled from [VOC2012](http://cvlab.postech.ac.kr/~mooyeol/pascal_voc_2012/).
+Train dataset has 16700 images and Val dataset has 425 images.
+Download the datasets from [here](https://pan.baidu.com/s/1xuFperu2WiYc5-_QXBemlA)(access code:5tzp), and then extract it into `data` directory.
 
 ### Test Image Dataset
-
-
-测试数据从以下数据中采样.
-
-
-| **Set 5** |  [Bevilacqua et al. BMVC 2012](http://people.rennes.inria.fr/Aline.Roumy/results/SR_BMVC12.html)|
-| ---- | ---- |
-| **Set 14** | **[Zeyde et al. LNCS 2010](https://sites.google.com/site/romanzeyde/research-interests)** |
-| **BSD 100** | **[Martin et al. ICCV 2001](https://www.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)** |
-| **Sun-Hays 80** | **[Sun and Hays ICCP 2012](http://cs.brown.edu/~lbsun/SRproj2012/SR_iccp2012.html)** |
-| **Urban 100** | **[Huang et al. CVPR 2015](https://sites.google.com/site/jbhuang0604/publications/struct_sr)** |
-数据集从 [这里](https://pan.baidu.com/s/1vGosnyal21wGgVffriL1VQ) 下载 (提取码 : xwhy), 并将数据解压到 `data` 目录.
+The test image dataset are sampled from 
+| **Set 5** |  [Bevilacqua et al. BMVC 2012](http://people.rennes.inria.fr/Aline.Roumy/results/SR_BMVC12.html)
+| **Set 14** |  [Zeyde et al. LNCS 2010](https://sites.google.com/site/romanzeyde/research-interests)
+| **BSD 100** | [Martin et al. ICCV 2001](https://www.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)
+| **Sun-Hays 80** | [Sun and Hays ICCP 2012](http://cs.brown.edu/~lbsun/SRproj2012/SR_iccp2012.html)
+| **Urban 100** | [Huang et al. CVPR 2015](https://sites.google.com/site/jbhuang0604/publications/struct_sr).
+Download the image dataset from [here](https://pan.baidu.com/s/1vGosnyal21wGgVffriL1VQ)(access code:xwhy), and then extract it into `data` directory.
 
 ### Test Video Dataset
-测试集视频数据集是三段预告片.
+The test video dataset are three trailers. Download the video dataset from 
+[here](https://pan.baidu.com/s/1NUZKm5xCHRj1O0JlCZIu8Q)(access code:zabi).
 
-从 [这里](https://pan.baidu.com/s/1NUZKm5xCHRj1O0JlCZIu8Q) 下载 (提取码 : zabi).
-
-## 用法
+## Usage
 
 ### Train
 ```
@@ -50,12 +44,9 @@ optional arguments:
 --upscale_factor              super resolution upscale factor [default value is 4](choices:[2, 4, 8])
 --num_epochs                  train epoch number [default value is 100]
 ```
-输出的超分辨率图像位于`training_results`目录中.
-
-
+The output val super resolution images are on `training_results` directory.
 
 ### Test Benchmark Datasets
-
 ```
 python test_benchmark.py
 
@@ -65,10 +56,7 @@ optional arguments:
 ```
 The output super resolution images are on `benchmark_results` directory.
 
-
-
-### 测试单张图片
-
+### Test Single Image
 ```
 python test_image.py
 
@@ -80,9 +68,7 @@ optional arguments:
 ```
 The output super resolution image are on the same directory.
 
-
-
-### 测试单段视频
+### Test Single Video
 ```
 python test_video.py
 
@@ -93,18 +79,15 @@ optional arguments:
 ```
 The output super resolution video and compared video are on the same directory.
 
-
-
 ## Benchmarks
 **Upscale Factor = 2**
 
-在一块儿 `NVIDIA GTX 1080Ti GPU` 上，batch size 为 64 的 Epoch 大约需要 2分钟30秒 的时间
+Epochs with batch size of 64 takes ~2 minute 30 seconds on a NVIDIA GTX 1080Ti GPU. 
 
+> Image Results
 
-
-#### Image Results
-
-左边是双三次插值图像，中间是高分辨率原图，右边是超分辨率图像(SRGAN的输出).
+The left is bicubic interpolation image, the middle is high resolution image, and 
+the right is super resolution image(output of the SRGAN).
 
 - BSD100_070(PSNR:32.4517; SSIM:0.9191)
 
@@ -122,9 +105,7 @@ The output super resolution video and compared video are on the same directory.
 
 ![Urban100_098](images/4.png)
 
-
-
-#### Video Results
+> Video Results
 
 The left is bicubic interpolation video, the right is super resolution video(output of the SRGAN).
 
