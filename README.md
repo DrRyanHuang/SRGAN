@@ -1,4 +1,4 @@
-中文|[English](./README_CN.md)
+中文|[English](./README_EN.md)
 
 # SRGAN
 

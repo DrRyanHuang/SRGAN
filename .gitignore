@@ -1,0 +1,6 @@
+data/*
+__pycache__
+benchmark_results/*
+epochs/*
+statistics/*
+training_results/*

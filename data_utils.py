@@ -7,6 +7,12 @@ from torchvision.transforms import Compose, RandomCrop, ToTensor, ToPILImage, Ce
 
 
 def is_image_file(filename):
+    '''
+    @Brife:
+        第一次用到 any, 文档写的很清楚:
+            Return True if bool(x) is True for any x in the iterable.
+            If the iterable is empty, return False.
+    '''
     return any(filename.endswith(extension) for extension in ['.png', '.jpg', '.jpeg', '.PNG', '.JPG', '.JPEG'])
 
 
@@ -16,16 +22,16 @@ def calculate_valid_crop_size(crop_size, upscale_factor):
 
 def train_hr_transform(crop_size):
     return Compose([
-        RandomCrop(crop_size),
-        ToTensor(),
+        RandomCrop(crop_size), # 随机裁剪字符串, shape : (crop_size, crop_size), 其输入为 PIL Image
+        ToTensor(),            # (PIL Image | np.ndarray) -> tensor
     ])
 
 
 def train_lr_transform(crop_size, upscale_factor):
     return Compose([
-        ToPILImage(),
+        ToPILImage(), # (Torch Tensor | np.ndarray) -> PIL Image
         Resize(crop_size // upscale_factor, interpolation=Image.BICUBIC),
-        ToTensor()
+        ToTensor()    # (PIL Image | np.ndarray) -> tensor
     ])
 
 
@@ -39,6 +45,11 @@ def display_transform():
 
 
 class TrainDatasetFromFolder(Dataset):
+    '''
+    @Notice:
+        虽然继承自 Dataset 类, 但是推荐 go to defination 看一下, 
+        它也没实现个啥(除了 `__add__` 以及 `__len__` 的注释)
+    '''
     def __init__(self, dataset_dir, crop_size, upscale_factor):
         super(TrainDatasetFromFolder, self).__init__()
         self.image_filenames = [join(dataset_dir, x) for x in listdir(dataset_dir) if is_image_file(x)]

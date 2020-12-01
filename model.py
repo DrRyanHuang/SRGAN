@@ -10,7 +10,7 @@ class Generator(nn.Module):
         super(Generator, self).__init__()
         self.block1 = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=9, padding=4),
-            nn.PReLU()
+            nn.PReLU() # (Parametric Rectified Linear Unit) x < 0 时, 其参数 k(初始0.25) 可学习
         )
         self.block2 = ResidualBlock(64)
         self.block3 = ResidualBlock(64)
@@ -80,8 +80,8 @@ class Discriminator(nn.Module):
         )
 
     def forward(self, x):
-        batch_size = x.size(0)
-        return torch.sigmoid(self.net(x).view(batch_size))
+        batch_size = x.size(0) # 64
+        return torch.sigmoid(self.net(x).view(batch_size)) # torch.Size([64])
 
 
 class ResidualBlock(nn.Module):
@@ -112,6 +112,6 @@ class UpsampleBLock(nn.Module):
 
     def forward(self, x):
         x = self.conv(x)
-        x = self.pixel_shuffle(x)
+        x = self.pixel_shuffle(x) # 上采样算法 ： area 变为原来的 x^2 倍, 通道数减小为 1/x^2
         x = self.prelu(x)
         return x
