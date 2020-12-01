@@ -1,3 +1,5 @@
+中文|[English](./README.md)
+
 # SRGAN
 
 SRGAN 的 PyTorch 实现，基于 CVPR 2017 论文[Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802).
